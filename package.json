@@ -1,5 +1,5 @@
 {
-  "name": "poc-renner-biometria",
+  "name": "image-capture-html",
   "version": "1.0.0",
   "description": "Poc para validar captura de imagens com HTML",
   "main": "index.js",
