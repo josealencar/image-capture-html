@@ -4,6 +4,7 @@
   "description": "Poc para validar captura de imagens com HTML",
   "main": "index.js",
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
