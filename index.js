@@ -103,10 +103,27 @@
     
       var data = canvas.toDataURL('image/png');
       photo.setAttribute('src', data);
+      showPhoto();
     } else {
       clearphoto();
     }
   }
+
+  // Custom
+  function showPhoto() {
+    document.getElementById("output").style.display = 'block';
+    document.getElementById("camera").style.display = 'none';
+  }
+
+  function showTakePicture() {
+    document.getElementById("output").style.display = 'none';
+    document.getElementById("camera").style.display = 'block';
+  }
+
+  document.getElementById('startagain').addEventListener('click', function(ev){
+    showTakePicture();
+    ev.preventDefault();
+  }, false);
 
   // Set up our event listener to run the startup process
   // once loading is complete.
