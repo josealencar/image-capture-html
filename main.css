@@ -105,3 +105,13 @@
 .wizard .current:after {
     border-left-color: #007ACC;
 }
+
+.center-width {
+    width: 50%;
+    margin: 0 25% 0 25%;
+}
+
+.fill-width {
+    width: 100%;
+    margin: 0 0 0 0;
+}

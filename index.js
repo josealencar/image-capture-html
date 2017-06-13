@@ -27,6 +27,8 @@
     startbutton = document.getElementById('startbutton');
     startagain = document.getElementById('startagain');
 
+    width = video.parentElement.clientWidth;
+
     navigator.getMedia = ( navigator.getUserMedia ||
                            navigator.webkitGetUserMedia ||
                            navigator.mozGetUserMedia ||
