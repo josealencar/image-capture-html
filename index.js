@@ -1,4 +1,5 @@
 (function() {
+  var FileSaver = require('file-saver');
   // The width and height of the captured photo. We will set the
   // width to the value defined here, but the height will be
   // calculated based on the aspect ratio of the input stream.
@@ -19,6 +20,7 @@
   var photo = null;
   var startbutton = null;
   var startagain = null;
+  var savepic = null;
 
   function startup() {
     video = document.getElementById('video');
@@ -26,6 +28,7 @@
     photo = document.getElementById('photo');
     startbutton = document.getElementById('startbutton');
     startagain = document.getElementById('startagain');
+    savepic = document.getElementById('savepic');
 
     width = video.parentElement.clientWidth;
 
@@ -81,6 +84,11 @@
       showTakePicture();
       ev.preventDefault();
     }, false);
+
+    savepic.addEventListener('click', function(ev){
+      savePicture();
+      ev.preventDefault();
+    }, false);
     
     clearphoto();
   }
@@ -127,6 +135,14 @@
   function showTakePicture() {
     document.getElementById('output').style.display = 'none';
     document.getElementById('camera').style.display = 'block';
+  }
+
+  function savePicture() {
+    ctx = canvas.getContext("2d");
+    // draw to canvas...
+    canvas.toBlob(function(blob) {
+        FileSaver.saveAs(blob, "exemplo.png");
+    });
   }
 
   // Set up our event listener to run the startup process
