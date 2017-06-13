@@ -5,8 +5,8 @@
   // width to the value defined here, but the height will be
   // calculated based on the aspect ratio of the input stream.
 
-  var width = 200;    // We will scale the photo width to this
-  var height = 200;     // This will be computed based on the input stream
+  var width = window.innerWidth;    // We will scale the photo width to this
+  var height = window.innerHeight;     // This will be computed based on the input stream
 
   // |streaming| indicates whether or not we're currently streaming
   // video from the camera. Obviously, we start at false.
