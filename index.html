@@ -12,25 +12,17 @@
 
 <body>
 
-	<div class="container center-width">
-		<h3>Wizard</h3>
-		<div class="wizard fill-width">
-				<a id="take-pic" class="current"><span class="badge">1</span> Take a Picture</a>
-				<a id="see-pic"><span class="badge">2</span> See how it looks</a>
+	<div class="contentarea">
+		<div id="camera" class="camera fill-width">
+			<video id="video">Video stream not available.</video>
+			<button id="startbutton">Take photo</button>
 		</div>
-	
-		<div class="contentarea">
-			<div id="camera" class="camera fill-width">
-				<video id="video" style="width: 200px; height: 200px">Video stream not available.</video>
-				<button id="startbutton">Take photo</button>
-			</div>
-			<canvas id="canvas">
-			</canvas>
-			<div id="output" class="output" style="display: none;">
-				<img id="photo" alt="The screen capture will appear in this box.">
-				<button id="startagain">Try again</button>
-				<button id="savepic">Save Pic</button>
-			</div>
+		<canvas id="canvas">
+		</canvas>
+		<div id="output" class="output" style="display: none;">
+			<img id="photo" alt="The screen capture will appear in this box.">
+			<button id="startagain">Try again</button>
+			<button id="savepic">Save Pic</button>
 		</div>
 	</div>
 </body>
