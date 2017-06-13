@@ -18,12 +18,14 @@
   var canvas = null;
   var photo = null;
   var startbutton = null;
+  var startagain = null;
 
   function startup() {
     video = document.getElementById('video');
     canvas = document.getElementById('canvas');
     photo = document.getElementById('photo');
     startbutton = document.getElementById('startbutton');
+    startagain = document.getElementById('startagain');
 
     navigator.getMedia = ( navigator.getUserMedia ||
                            navigator.webkitGetUserMedia ||
@@ -72,6 +74,11 @@
       takepicture();
       ev.preventDefault();
     }, false);
+
+    startagain.addEventListener('click', function(ev){
+      showTakePicture();
+      ev.preventDefault();
+    }, false);
     
     clearphoto();
   }
@@ -111,19 +118,14 @@
 
   // Custom
   function showPhoto() {
-    document.getElementById("output").style.display = 'block';
-    document.getElementById("camera").style.display = 'none';
+    document.getElementById('output').style.display = 'block';
+    document.getElementById('camera').style.display = 'none';
   }
 
   function showTakePicture() {
-    document.getElementById("output").style.display = 'none';
-    document.getElementById("camera").style.display = 'block';
+    document.getElementById('output').style.display = 'none';
+    document.getElementById('camera').style.display = 'block';
   }
-
-  document.getElementById('startagain').addEventListener('click', function(ev){
-    showTakePicture();
-    ev.preventDefault();
-  }, false);
 
   // Set up our event listener to run the startup process
   // once loading is complete.
