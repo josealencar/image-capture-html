@@ -5,8 +5,8 @@
   // width to the value defined here, but the height will be
   // calculated based on the aspect ratio of the input stream.
 
-  var width = window.innerWidth > window.innerHeight ? window.innerWidth / 2 : window.innerWidth;    // We will scale the photo width to this
-  var height = 0;     // This will be computed based on the input stream
+  var width = 200;    // We will scale the photo width to this
+  var height = 200;     // This will be computed based on the input stream
 
   // |streaming| indicates whether or not we're currently streaming
   // video from the camera. Obviously, we start at false.
@@ -30,8 +30,6 @@
     startbutton = document.getElementById('startbutton');
     startagain = document.getElementById('startagain');
     savepic = document.getElementById('savepic');
-
-    width = video.parentElement.clientWidth;
 
     navigator.getMedia = ( navigator.getUserMedia ||
                            navigator.webkitGetUserMedia ||
@@ -59,17 +57,17 @@
 
     video.addEventListener('canplay', function(ev){
       if (!streaming) {
-        height = video.videoHeight / (video.videoWidth/width);
+        //height = video.videoHeight / (video.videoWidth/width);
       
         // Firefox currently has a bug where the height can't be read from
         // the video, so we will make assumptions if this happens.
       
-        if (isNaN(height)) {
-          height = width / (4/3);
-        }
+        //if (isNaN(height)) {
+          //height = width / (4/3);
+        //}
       
-        video.setAttribute('width', width);
-        video.setAttribute('height', height);
+        //video.setAttribute('width', width);
+        //video.setAttribute('height', height);
         canvas.setAttribute('width', width);
         canvas.setAttribute('height', height);
         streaming = true;
