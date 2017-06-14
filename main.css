@@ -20,7 +20,8 @@
 }
 
 .output {
-  width: 340px;
+  width: 100%;
+  height: 100%;
   display:inline-block;
 }
 
@@ -64,7 +65,7 @@
 }
 
 body button {
-  display:block;
+  display:inline-block;
   position:relative;
   margin-left:auto;
   margin-right:auto;

@@ -107,7 +107,7 @@
     if (width && height) {
       canvas.width = width;
       canvas.height = height;
-      context.drawImage(video, 50, 50, width - 50, height - 250);
+      context.drawImage(video, 0, 0, width, height);
     
       var data = canvas.toDataURL('image/png');
       photo.setAttribute('src', data);
@@ -121,11 +121,13 @@
   function showPhoto() {
     document.getElementById('output').style.display = 'block';
     document.getElementById('camera').style.display = 'none';
+    document.getElementById('overlay').style.display = 'block';
   }
 
   function showTakePicture() {
     document.getElementById('output').style.display = 'none';
     document.getElementById('camera').style.display = 'block';
+    document.getElementById('overlay').style.display = 'none';
   }
 
   function savePicture() {
