@@ -57,14 +57,6 @@
 
     video.addEventListener('canplay', function(ev){
       if (!streaming) {
-        //height = video.videoHeight / (video.videoWidth/width);
-      
-        // Firefox currently has a bug where the height can't be read from
-        // the video, so we will make assumptions if this happens.
-      
-        //if (isNaN(height)) {
-          //height = width / (4/3);
-        //}
       
         video.setAttribute('width', window.innerWidth);
         video.setAttribute('height', window.innerHeight);
@@ -115,7 +107,7 @@
     if (width && height) {
       canvas.width = width;
       canvas.height = height;
-      context.drawImage(video, 0, 0, width, height);
+      context.drawImage(video, 50, 50, width - 50, height - 250);
     
       var data = canvas.toDataURL('image/png');
       photo.setAttribute('src', data);

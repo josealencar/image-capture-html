@@ -24,20 +24,6 @@
   display:inline-block;
 }
 
-#startbutton {
-  display:block;
-  position:relative;
-  margin-left:auto;
-  margin-right:auto;
-  bottom:32px;
-  background-color: rgba(0, 150, 0, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  box-shadow: 0px 0px 1px 2px rgba(0, 0, 0, 0.2);
-  font-size: 14px;
-  font-family: "Lucida Grande", "Arial", sans-serif;
-  color: rgba(255, 255, 255, 1.0);
-}
-
 .contentarea {
   font-size: 16px;
   font-family: "Lucida Grande", "Arial", sans-serif;
@@ -65,16 +51,30 @@
 
 .app__overlay {
     position: fixed;
-    top: -56px;
+    top: 0px;
     bottom: 0;
     right: 0;
     left: 0;
     border-color: #fff223;
     border-width: 2px;
     transition: all .2s ease-in;
-    width: 360px;
-    height: 360px;
-    margin: auto;
+    margin: 50px 50px 250px 50px;
     border-radius: 2px;
     border-style: solid;
+}
+
+body button {
+  display:block;
+  position:relative;
+  margin-left:auto;
+  margin-right:auto;
+  bottom:120px;
+  background-color: rgba(0, 150, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0px 0px 1px 2px rgba(0, 0, 0, 0.2);
+  font-size: 25px;
+  font-family: "Lucida Grande", "Arial", sans-serif;
+  color: rgba(255, 255, 255, 1.0);
+  width: 300px;
+  height: 100px;
 }
