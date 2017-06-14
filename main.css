@@ -62,3 +62,19 @@
     height: 100%;
     margin: 0 0 0 0;
 }
+
+.app__overlay {
+    position: fixed;
+    top: -56px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    border-color: #fff223;
+    border-width: 2px;
+    transition: all .2s ease-in;
+    width: 360px;
+    height: 360px;
+    margin: auto;
+    border-radius: 2px;
+    border-style: solid;
+}
