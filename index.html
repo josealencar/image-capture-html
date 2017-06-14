@@ -1,33 +1,43 @@
 <!doctype html>
 <html>
 
-<head>
-	<title>WebRTC: Still photo capture demo</title>
-	<meta charset='utf-8'>
-	<link rel="stylesheet" href="main.css" type="text/css" media="all">
-	<script src="bundle.js">
+	<head>
+		<title>Web photo capture</title>
+		<meta charset='utf-8'>
+		  <!-- Add to home screen for Safari on iOS -->
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-title" content="Weather PWA">
+		<link rel="apple-touch-icon" href="images/icons/icon-152x152.png">
+		<meta name="msapplication-TileImage" content="images/icons/icon-144x144.png">
+		<meta name="msapplication-TileColor" content="#2F3BA2">
+		<link rel="manifest" href="/manifest.json">
+		<link rel="stylesheet" href="main.css" type="text/css" media="all">
+		<script src="app.js"></script>
+		<script src="bundle.js"></script>
+	</head>
 
-	</script>
-</head>
+	<body>
 
-<body>
+		<div class="contentarea">
+			<div id="camera" class="camera fill-screen">
+				<video class="fill-screen" id="video">Video stream not available.</video>
+				<button id="startbutton">Take photo</button>
+			</div>
 
-	<div class="contentarea">
-		<div id="camera" class="camera fill-screen">
-			<video class="fill-screen" id="video">Video stream not available.</video>
-			<button id="startbutton">Take photo</button>
+			<canvas id="canvas" class="fill-screen">
+			</canvas>
+
+			<div id="overlay" class="app__overlay">
+				<div class="app__overlay-frame"></div>
+			</div>
+
+			<div id="output" class="output fill-screen" style="display: none;">
+				<img class="fill-screen" id="photo" alt="The screen capture will appear in this box.">
+				<button id="startagain">Try again</button>
+				<button id="savepic">Save Pic</button>
+			</div>
 		</div>
-		<canvas id="canvas" class="fill-screen">
-		</canvas>
-		<div id="overlay" class="app__overlay">
-			<div class="app__overlay-frame"></div>
-		</div>
-		<div id="output" class="output fill-screen" style="display: none;">
-			<img class="fill-screen" id="photo" alt="The screen capture will appear in this box.">
-			<button id="startagain">Try again</button>
-			<button id="savepic">Save Pic</button>
-		</div>
-	</div>
-</body>
+	</body>
 
 </html>
