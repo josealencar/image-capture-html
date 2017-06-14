@@ -120,13 +120,13 @@
   function showPhoto() {
     document.getElementById('output').style.display = 'block';
     document.getElementById('camera').style.display = 'none';
-    document.getElementById('overlay').style.display = 'block';
+    document.getElementById('overlay').style.display = 'none';
   }
 
   function showTakePicture() {
     document.getElementById('output').style.display = 'none';
     document.getElementById('camera').style.display = 'block';
-    document.getElementById('overlay').style.display = 'none';
+    document.getElementById('overlay').style.display = 'block';
   }
 
   function savePicture() {
