@@ -22,25 +22,13 @@
   var startbutton = null;
   var startagain = null;
   var savepic = null;
+  var devicesAvailable = null;
+  var deviceUse = null;
+  var canShowSwitchCamera = false;
 
-  function startup() {
-    video = document.getElementById('video');
-    canvas = document.getElementById('canvas');
-    photo = document.getElementById('photo');
-    startbutton = document.getElementById('startbutton');
-    startagain = document.getElementById('startagain');
-    savepic = document.getElementById('savepic');
-
-    navigator.getMedia = ( navigator.getUserMedia ||
-                           navigator.webkitGetUserMedia ||
-                           navigator.mozGetUserMedia ||
-                           navigator.msGetUserMedia);
-
+  function startCapture(constrains) {
     navigator.getMedia(
-      {
-        video: true,
-        audio: false
-      },
+      constrains,
       function(stream) {
         if (navigator.mozGetUserMedia) {
           video.mozSrcObject = stream;
@@ -48,7 +36,6 @@
           var vendorURL = window.URL || window.webkitURL;
           video.src = vendorURL.createObjectURL(stream);
         }
-        //video.play();
       },
       function(err) {
         console.log("An error occured! " + err);
@@ -65,6 +52,64 @@
         streaming = true;
       }
     }, false);
+  }
+
+  function startup() {
+    video = document.getElementById('video');
+    canvas = document.getElementById('canvas');
+    photo = document.getElementById('photo');
+    startbutton = document.getElementById('startbutton');
+    startagain = document.getElementById('startagain');
+    savepic = document.getElementById('savepic');
+    switchcamera = document.getElementById('switchcamera');
+
+    navigator.getMedia = ( navigator.getUserMedia ||
+                           navigator.webkitGetUserMedia ||
+                           navigator.mozGetUserMedia ||
+                           navigator.msGetUserMedia);
+
+    
+    navigator.mediaDevices.enumerateDevices().then(function (devices) {
+				devicesAvailable = devices.filter(function(device) {
+					var deviceLabel = device.label.split(',')[1];
+					if (device.kind == "videoinput") {
+						return device;
+					}
+				});
+
+				if (devicesAvailable.length > 1) {
+          deviceUse = 1;
+					var constraints = {
+						video: {
+							mandatory: {
+								sourceId: devicesAvailable[1].deviceId ? devicesAvailable[1].deviceId : null
+							}
+						},
+						audio: false
+					};
+
+					startCapture(constraints);
+				}
+				else if (devicesAvailable.length) {
+          deviceUse = 0;
+					var constraints = {
+						video: {
+							mandatory: {
+								sourceId: devicesAvailable[0].deviceId ? devicesAvailable[0].deviceId : null
+							}
+						},
+						audio: false
+					};
+
+					startCapture(constraints);
+				}
+				else {
+					startCapture({video:true});
+				}
+			})
+			.catch(function (error) {
+				console.error("Error occurred : ", error);
+    });
 
     startbutton.addEventListener('click', function(ev){
       takepicture();
@@ -78,6 +123,11 @@
 
     savepic.addEventListener('click', function(ev){
       savePicture();
+      ev.preventDefault();
+    }, false);
+
+    switchcamera.addEventListener('click', function(ev){
+      switchCamera();
       ev.preventDefault();
     }, false);
     
@@ -118,6 +168,14 @@
   }
 
   // Custom
+  function enableSwitchCamera() {
+    document.getElementById('switchcamera').style.display = 'inline-block';
+  }
+
+  function disableSwitchCamera() {
+    document.getElementById('switchcamera').style.display = 'none';
+  }
+
   function showPhoto() {
     document.getElementById('output').style.display = 'block';
     document.getElementById('camera').style.display = 'none';
@@ -132,6 +190,7 @@
     for (var o = 0; o < elementsToHide.length; o++) {
       elementsToHide[o].style.display = 'none';
     }
+    disableSwitchCamera();
   }
 
   function showTakePicture() {
@@ -148,6 +207,10 @@
     for (var o = 0; o < elementsToHide.length; o++) {
       elementsToHide[o].style.display = 'none';
     }
+
+    if (canShowSwitchCamera) {
+      enableSwitchCamera();
+    }
   }
 
   function savePicture() {
@@ -156,6 +219,41 @@
     canvas.toBlob(function(blob) {
         FileSaver.saveAs(blob, "exemplo.png");
     });
+  }
+
+  function switchCamera() {
+    if (devicesAvailable.length > 0) {
+      switch (deviceUse) {
+        case 0:
+          deviceUse = 1;
+          var constraints = {
+						video: {
+							mandatory: {
+								sourceId: devicesAvailable[1].deviceId ? devicesAvailable[1].deviceId : null
+							}
+						},
+						audio: false
+					};
+
+					startCapture(constraints);
+          break;
+        case 1:
+          deviceUse = 0;
+          var constraints = {
+						video: {
+							mandatory: {
+								sourceId: devicesAvailable[0].deviceId ? devicesAvailable[0].deviceId : null
+							}
+						},
+						audio: false
+					};
+
+					startCapture(constraints);
+          break;
+        default:
+          break;
+      }
+    }
   }
 
   // Set up our event listener to run the startup process
