@@ -129,7 +129,7 @@
 
     var elementsToHide = document.getElementsByClassName('btn-pic');
     for (var o = 0; o < elementsToHide.length; o++) {
-      elementsToHide[o].style.display = 'block';
+      elementsToHide[o].style.display = 'none';
     }
   }
 
@@ -145,7 +145,7 @@
 
     var elementsToHide = document.getElementsByClassName('btn-show');
     for (var o = 0; o < elementsToHide.length; o++) {
-      elementsToHide[o].style.display = 'block';
+      elementsToHide[o].style.display = 'none';
     }
   }
 
