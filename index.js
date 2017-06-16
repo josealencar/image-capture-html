@@ -47,7 +47,7 @@
           var vendorURL = window.URL || window.webkitURL;
           video.src = vendorURL.createObjectURL(stream);
         }
-        video.play();
+        //video.play();
       },
       function(err) {
         console.log("An error occured! " + err);
@@ -121,12 +121,32 @@
     document.getElementById('output').style.display = 'block';
     document.getElementById('camera').style.display = 'none';
     document.getElementById('overlay').style.display = 'none';
+
+    var elementsToShow = document.getElementsByClassName('btn-show');
+    for (var i = 0; i < elementsToShow.length; i++) {
+      elementsToShow[i].style.display = 'block';
+    }
+
+    var elementsToHide = document.getElementsByClassName('btn-pic');
+    for (var o = 0; o < elementsToHide.length; o++) {
+      elementsToHide[o].style.display = 'block';
+    }
   }
 
   function showTakePicture() {
     document.getElementById('output').style.display = 'none';
     document.getElementById('camera').style.display = 'block';
     document.getElementById('overlay').style.display = 'block';
+
+    var elementsToShow = document.getElementsByClassName('btn-pic');
+    for (var i = 0; i < elementsToShow.length; i++) {
+      elementsToShow[i].style.display = 'block';
+    }
+
+    var elementsToHide = document.getElementsByClassName('btn-show');
+    for (var o = 0; o < elementsToHide.length; o++) {
+      elementsToHide[o].style.display = 'block';
+    }
   }
 
   function savePicture() {
