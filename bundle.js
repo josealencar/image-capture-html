@@ -26,34 +26,6 @@
   var deviceUse = null;
   var canShowSwitchCamera = false;
 
-  function startCapture(constrains) {
-    navigator.getMedia(
-      constrains,
-      function(stream) {
-        if (navigator.mozGetUserMedia) {
-          video.mozSrcObject = stream;
-        } else {
-          var vendorURL = window.URL || window.webkitURL;
-          video.src = vendorURL.createObjectURL(stream);
-        }
-      },
-      function(err) {
-        console.log("An error occured! " + err);
-      }
-    );
-
-    video.addEventListener('canplay', function(ev){
-      if (!streaming) {
-      
-        video.setAttribute('width', window.innerWidth);
-        video.setAttribute('height', window.innerHeight);
-        canvas.setAttribute('width', window.innerWidth);
-        canvas.setAttribute('height', window.innerHeight);
-        streaming = true;
-      }
-    }, false);
-  }
-
   function startup() {
     video = document.getElementById('video');
     canvas = document.getElementById('canvas');
@@ -81,29 +53,13 @@
           enableSwitchCamera();
           canShowSwitchCamera = true;
           deviceUse = 1;
-					var constraints = {
-						video: {
-							optional: {
-								sourceId: devicesAvailable[1].deviceId ? devicesAvailable[1].deviceId : null
-							}
-						},
-						audio: false
-					};
 
-					startCapture(constraints);
+					startCapture(buildConstraints(1));
 				}
 				else if (devicesAvailable.length) {
           deviceUse = 0;
-					var constraints = {
-						video: {
-							optional: {
-								sourceId: devicesAvailable[0].deviceId ? devicesAvailable[0].deviceId : null
-							}
-						},
-						audio: false
-					};
 
-					startCapture(constraints);
+					startCapture(buildConstraints(0));
 				}
 				else {
 					startCapture({video:true});
@@ -134,6 +90,34 @@
     }, false);
     
     clearphoto();
+  }
+
+  function startCapture(constrains) {
+    navigator.getMedia(
+      constrains,
+      function(stream) {
+        if (navigator.mozGetUserMedia) {
+          video.mozSrcObject = stream;
+        } else {
+          var vendorURL = window.URL || window.webkitURL;
+          video.src = vendorURL.createObjectURL(stream);
+        }
+      },
+      function(err) {
+        console.log("An error occured! " + err);
+      }
+    );
+
+    video.addEventListener('canplay', function(ev){
+      if (!streaming) {
+      
+        video.setAttribute('width', window.innerWidth);
+        video.setAttribute('height', window.innerHeight);
+        canvas.setAttribute('width', window.innerWidth);
+        canvas.setAttribute('height', window.innerHeight);
+        streaming = true;
+      }
+    }, false);
   }
 
   // Fill the photo with an indication that none has been
@@ -223,34 +207,39 @@
     });
   }
 
+  function buildConstraints(id) {
+    var constraints = {
+						video: {
+							mandatory: {
+								sourceId: devicesAvailable[id].deviceId ? devicesAvailable[id].deviceId : null
+							},
+              optional: [ buildOptionals() ]
+						},
+						audio: false
+					};
+    return constraints;
+  }
+
+  function buildOptionals() {
+    var arrayOptionals = [];
+    for (var z = 0; z < devicesAvailable.length; z++) {
+      arrayOptionals.push({sourceId : devicesAvailable[z].deviceId ? devicesAvailable[z].deviceId : null});
+    }
+    return arrayOptionals;
+  }
+
   function switchCamera() {
     if (devicesAvailable.length > 0) {
       switch (deviceUse) {
         case 0:
           deviceUse = 1;
-          var constraints = {
-						video: {
-							optional: {
-								sourceId: devicesAvailable[1].deviceId ? devicesAvailable[1].deviceId : null
-							}
-						},
-						audio: false
-					};
-
-					startCapture(constraints);
+          
+					startCapture(buildConstraints(1));
           break;
         case 1:
           deviceUse = 0;
-          var constraints = {
-						video: {
-							optional: {
-								sourceId: devicesAvailable[0].deviceId ? devicesAvailable[0].deviceId : null
-							}
-						},
-						audio: false
-					};
 
-					startCapture(constraints);
+					startCapture(buildConstraints(0));
           break;
         default:
           break;
