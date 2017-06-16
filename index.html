@@ -15,11 +15,27 @@
 		<link rel="stylesheet" href="main.css" type="text/css" media="all">
 		<script src="app.js"></script>
 		<script src="bundle.js"></script>
+		<script type="text/javascript">
+			// Detect whether device supports orientationchange event, otherwise fall back to
+			// the resize event.
+			var supportsOrientationChange = "onorientationchange" in window,
+				orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
+
+			window.addEventListener(orientationEvent, function() {
+				if(window.orientation==0) {
+					document.getElementById('portrait').style.display = '';
+					document.getElementById('landscape').style.display = 'none';
+				} else if(window.orientation==90) {
+					document.getElementById('portrait').style.display = 'none';
+					document.getElementById('landscape').style.display = '';
+				}
+			}, false);
+		</script>
 	</head>
 
 	<body>
 
-		<div class="contentarea">
+		<div id="portrait" class="contentarea">
 			<div id="camera" class="camera fill-screen">
 				<video autoplay class="fill-screen" id="video">Video stream not available.</video>
 			</div>
@@ -34,12 +50,17 @@
 			<div id="output" class="output fill-screen" style="display: none;">
 				<img class="fill-screen" id="photo" alt="The screen capture will appear in this box.">
 			</div>
+
+			<div class="btn-div">
+				<button class="btn-pic" id="startbutton">Take photo</button>
+				<button class="btn-show" id="startagain" style="display: none;">Try again</button>
+				<button class="btn-show" id="savepic" style="display: none;">Save Pic</button>
+			</div>
 		</div>
-		<div class="btn-div">
-			<button class="btn-pic" id="startbutton">Take photo</button>
-			<button class="btn-show" id="startagain" style="display: none;">Try again</button>
-			<button class="btn-show" id="savepic" style="display: none;">Save Pic</button>
+		<div id="landscape" style="display: none;">
+			<p>Sorry, only portrait view is supported.</p>
 		</div>
+		
 	</body>
 
 </html>
