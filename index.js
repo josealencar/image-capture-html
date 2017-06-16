@@ -22,8 +22,6 @@
   var startagain = null;
   var savepic = null;
   var devicesAvailable = null;
-  var deviceUse = null;
-  var canShowSwitchCamera = false;
 
   function startup() {
     video = document.getElementById('video');
@@ -32,7 +30,6 @@
     startbutton = document.getElementById('startbutton');
     startagain = document.getElementById('startagain');
     savepic = document.getElementById('savepic');
-    switchcamera = document.getElementById('switchcamera');
 
     navigator.getMedia = ( navigator.getUserMedia ||
                            navigator.webkitGetUserMedia ||
@@ -49,15 +46,9 @@
 				});
 
 				if (devicesAvailable.length > 1) {
-          enableSwitchCamera();
-          canShowSwitchCamera = true;
-          deviceUse = 1;
-
 					startCapture(buildConstraints(1));
 				}
 				else if (devicesAvailable.length) {
-          deviceUse = 0;
-
 					startCapture(buildConstraints(0));
 				}
 				else {
@@ -80,11 +71,6 @@
 
     savepic.addEventListener('click', function(ev){
       savePicture();
-      ev.preventDefault();
-    }, false);
-
-    switchcamera.addEventListener('click', function(ev){
-      switchCamera();
       ev.preventDefault();
     }, false);
     
@@ -153,14 +139,6 @@
   }
 
   // Custom
-  function enableSwitchCamera() {
-    document.getElementById('switchcamera').style.display = 'inline-block';
-  }
-
-  function disableSwitchCamera() {
-    document.getElementById('switchcamera').style.display = 'none';
-  }
-
   function showPhoto() {
     document.getElementById('output').style.display = 'block';
     document.getElementById('camera').style.display = 'none';
@@ -175,7 +153,6 @@
     for (var o = 0; o < elementsToHide.length; o++) {
       elementsToHide[o].style.display = 'none';
     }
-    disableSwitchCamera();
   }
 
   function showTakePicture() {
@@ -192,10 +169,6 @@
     for (var o = 0; o < elementsToHide.length; o++) {
       elementsToHide[o].style.display = 'none';
     }
-
-    if (canShowSwitchCamera) {
-      enableSwitchCamera();
-    }
   }
 
   function savePicture() {
@@ -211,39 +184,11 @@
 						video: {
 							mandatory: {
 								sourceId: devicesAvailable[id].deviceId ? devicesAvailable[id].deviceId : null
-							},
-              optional: [ buildOptionals() ]
+							}
 						},
 						audio: false
 					};
     return constraints;
-  }
-
-  function buildOptionals() {
-    var arrayOptionals = [];
-    for (var z = 0; z < devicesAvailable.length; z++) {
-      arrayOptionals.push({sourceId : devicesAvailable[z].deviceId ? devicesAvailable[z].deviceId : null});
-    }
-    return arrayOptionals;
-  }
-
-  function switchCamera() {
-    if (devicesAvailable.length > 0) {
-      switch (deviceUse) {
-        case 0:
-          deviceUse = 1;
-          
-					startCapture(buildConstraints(1));
-          break;
-        case 1:
-          deviceUse = 0;
-
-					startCapture(buildConstraints(0));
-          break;
-        default:
-          break;
-      }
-    }
   }
 
   // Set up our event listener to run the startup process
