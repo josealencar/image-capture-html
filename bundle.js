@@ -83,7 +83,7 @@
           deviceUse = 1;
 					var constraints = {
 						video: {
-							mandatory: {
+							optional: {
 								sourceId: devicesAvailable[1].deviceId ? devicesAvailable[1].deviceId : null
 							}
 						},
@@ -96,7 +96,7 @@
           deviceUse = 0;
 					var constraints = {
 						video: {
-							mandatory: {
+							optional: {
 								sourceId: devicesAvailable[0].deviceId ? devicesAvailable[0].deviceId : null
 							}
 						},
@@ -230,7 +230,7 @@
           deviceUse = 1;
           var constraints = {
 						video: {
-							mandatory: {
+							optional: {
 								sourceId: devicesAvailable[1].deviceId ? devicesAvailable[1].deviceId : null
 							}
 						},
@@ -243,7 +243,7 @@
           deviceUse = 0;
           var constraints = {
 						video: {
-							mandatory: {
+							optional: {
 								sourceId: devicesAvailable[0].deviceId ? devicesAvailable[0].deviceId : null
 							}
 						},
