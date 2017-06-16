@@ -77,6 +77,8 @@
 				});
 
 				if (devicesAvailable.length > 1) {
+          enableSwitchCamera();
+          canShowSwitchCamera = true;
           deviceUse = 1;
 					var constraints = {
 						video: {
