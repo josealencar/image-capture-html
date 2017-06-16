@@ -68,7 +68,7 @@
 
 .btn-div {
   position: fixed;
-  bottom: 0;
+  bottom: 25px;
   right: 0;
   left: 0;
   display: inline-block;

@@ -124,7 +124,7 @@
 
     var elementsToShow = document.getElementsByClassName('btn-show');
     for (var i = 0; i < elementsToShow.length; i++) {
-      elementsToShow[i].style.display = 'block';
+      elementsToShow[i].style.display = 'inline-block';
     }
 
     var elementsToHide = document.getElementsByClassName('btn-pic');
@@ -140,7 +140,7 @@
 
     var elementsToShow = document.getElementsByClassName('btn-pic');
     for (var i = 0; i < elementsToShow.length; i++) {
-      elementsToShow[i].style.display = 'block';
+      elementsToShow[i].style.display = 'inline-block';
     }
 
     var elementsToHide = document.getElementsByClassName('btn-show');
